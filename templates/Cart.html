@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Table V01</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{{ url_for('static',filename ='images/icons/favicon.ico')  }}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='vendor/bootstrap/css/bootstrap.min.css')  }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='fonts/font-awesome-4.7.0/css/font-awesome.min.css')  }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='vendor/animate/animate.css')  }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='vendor/select2/select2.min.css')  }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='css/util.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='css/main.css') }}">
+<!--===============================================================================================-->
+</head>
+<body>
+	<h1 style="text-align: center;">CART</h1>
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Product ID</th>
+								<th class="column2">Product Name</th>
+								<th class="column3">Price</th>
+							</tr>
+						</thead>
+						<tbody>
+                {% for item in data %}
+								<tr>
+									<td class="column1">{{ item[2] }}</td>
+									<td class="column2">{{ item[4] }}</td>
+									<td class="column3">{{ item[3] }}</td>
+                </tr>
+                {% endfor %}
+						</tbody>
+          </table>
+				<div>Total : {{ net }}</div>
+          <a href="/Kirana" style="color: aliceblue;"> <-- Home</a>
+				</div>
+			</div>
+		</div>
+  </div>
+
+
+<!--===============================================================================================-->	
+	<script src="{{ url_for('static', filename = 'vendor/jquery/jquery-3.2.1.min.js') }}	"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename = 'vendor/bootstrap/js/popper.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename = 'vendor/select2/js/select2.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename = 'js/main.js') }}"></script>
+
+</body>
+</html>

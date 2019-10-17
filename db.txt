@@ -1,0 +1,20 @@
+create database KIRANA;
+use KIRANA;
+create table USER (Full_Name varchar(30) NOT NULL, Email_Address varchar(30) PRIMARY KEY, Mobile_Number varchar(30) UNIQUE, Pin varchar(30) NOT create database KIRANA;
+
+use KIRANA;
+
+create table USER (Full_Name varchar(30) NOT NULL, Email_Address varchar(30) PRIMARY KEY, Mobile_Number varchar(30) UNIQUE, Pin varchar(30) NOT NULL, OTP varchar(30));
+
+create table PRODUCT (Product_ID varchar(30) PRIMARY KEY, Product_Name varchar(30) NOT NULL, Product_Cost varchar(30) NOT NULL);
+
+INSERT into PRODUCT values ('101', 'DETTOL', '100');
+INSERT into PRODUCT values ('201', 'DOVE', '60');
+INSERT into PRODUCT values ('301', 'COLGATE', '40');
+
+
+create table CARTBILLING (Bill_No int(16) PRIMARY KEY AUTO_INCREMENT, User_Id varchar(30) NOT NULL, BillDate date NOT NULL, Timestamp timestamp NOT NULL, Net_Amount varchar(30) NOT NULL, Active varchar(30) NOT NULL);
+
+Alter table CARTBILLING AUTO_INCREMENT = 1001;
+
+create table ITEMBILLING (Bill_No varchar(30) NOT NULL, User_Id varchar(30) NOT NULL,Product_ID varchar(30) NOT NULL, Rate varchar(30) NOT NULL, Product_Name varchar(30) NOT NULL); 

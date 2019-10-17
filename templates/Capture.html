@@ -1,0 +1,126 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Capture</title>
+	<script>
+	
+	function dispIcons()
+		{
+			document.getElementById("right").style.display = 'block';
+			document.getElementById("wrong").style.display = 'block';
+
+
+		}
+	</script>
+	<style type="text/css">
+		body { font-family: Helvetica, sans-serif; }
+		h1 {text-align: center;
+		font-family: 'Times New Roman', Times, serif;}
+		h2, h3 { margin-top:0;
+		text-align: center;
+		font-family: Arial, Helvetica, sans-serif; }
+		form { margin-top: 15px; }
+		form > input { margin-right: 15px; }
+		#results { float:right; margin:20px; padding:20px; border:1px solid; background:#ccc; }
+		
+		#my_camera{
+			float: center;
+			padding-right: 50px;
+			margin: 0 auto;
+		}
+		#right{
+			font-size: 20px;
+			}
+
+		#wrong{
+				font-size: 60px;
+			
+		}
+		#btns
+		{
+			margin: auto;
+			display: block;
+		
+		}
+		#predict	
+		{
+			margin: auto;
+			display: block;
+		
+		}
+        </style>
+
+</head>
+<body bgcolor="#ffe6e6">
+	<h1>Press the take Screenschot button to capture an image of the product</h1>
+	 <div id="my_camera"></div>
+        <form id="forme">
+        <div id="results">Your captured image will appear here...</div>
+        <input type="hidden" name="imge" value="" id="imag">
+	<table cellpadding='15pt' align="center">
+	<tr><td><input type=button value="Take Snapshot" onClick="take_snapshot()"></td>
+		<td><input type="submit" value="Predict" id="predict" style="display : none;"></td>
+	</tr>
+	</table>
+	</form>
+	<!-- First, include the Webcam.js JavaScript Library -->
+	
+	<script  src="{{ url_for('static', filename = 'js/webcam.min.js') }}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Configure a few settings and attach camera -->
+	<script language="JavaScript">
+		Webcam.set({
+			width: 320,
+			height: 240,
+			image_format: 'jpeg',
+			jpeg_quality: 90
+		});
+		Webcam.attach( '#my_camera' );
+	</script>
+	
+	<div id="item" style="font-size: 100px"></div>
+	<div class = "icon" style="display: none;">
+<form method="POST" action="/GenerateCart">
+<input type="hidden" name="item" id="qwer" value="">
+ <input type="submit" value="Confirm">
+ <a href = "/Capture" id = "wrong"> &#10060; </a>
+</form>
+</div>
+	<!-- Code to handle taking the snapshot and displaying it locally -->
+	<script language="JavaScript">
+		function take_snapshot() {
+			// take snapshot and get image data
+			document.getElementById('predict').style.display = 'block'
+			Webcam.snap( function(data_uri) {
+				// display results in page
+				document.getElementById('results').innerHTML = 
+					'<h2>Here is your image:</h2>' + 
+                                        '<img src="'+data_uri+'"/>';
+                  document.getElementById('imag').value = data_uri;              
+			} );
+                }
+	$(document).ready(function() {
+     $('#forme').on('submit', function(event) {
+       $.ajax({
+          data : {
+             imge : $('#imag').val(),
+                 },
+             type : 'POST',
+             url : '/api/classify/'
+            })
+        .done(function(data) {
+          $('#item').text(data.class).show();
+		$('#qwer').val(data.class);
+		$('.icon').css('display','block');
+      });
+      event.preventDefault();
+      });
+});
+	</script>
+	 <br><br><br><br><br><br>
+	
+</body>
+</html>
